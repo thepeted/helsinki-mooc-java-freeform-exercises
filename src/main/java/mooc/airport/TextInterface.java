@@ -38,7 +38,7 @@ public class TextInterface {
                 String id = reader.nextLine();
                 System.out.print("Give plane capacity: ");
                 int capacity = Integer.parseInt(reader.nextLine());
-                airport.addAirplane(new Airplane(id, capacity));
+                airport.getAirplanes().add(new Airplane(id, capacity));
             }
 
             if (command == '2') {

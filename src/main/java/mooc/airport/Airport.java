@@ -18,10 +18,6 @@ public class Airport {
     }
     // End of singleton code
 
-    public void addAirplane(Airplane airplane) {
-        airplanes.add(airplane);
-    }
-
     public void addFlight(Flight flight) {
         flights.add(flight);
     }
