@@ -4,18 +4,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Airport {
-    private HashMap<String, Airplane> airplanes = new HashMap<>();
+    private ArrayList<Airplane> airplanes = new ArrayList<>();
     private ArrayList<Flight> flights = new ArrayList<>();
 
+    // Start of singleton code - in all modern frameworks, you'd just put @Singleton above the class definition instead
+    // For more on what's happening here see https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples
+    private static final Airport instance = new Airport();
+
+    private Airport() {}
+
+    public static Airport getInstance() {
+        return instance;
+    }
+    // End of singleton code
+
     public void addAirplane(Airplane airplane) {
-        airplanes.put(airplane.getId(), airplane);
+        airplanes.add(airplane);
     }
 
     public void addFlight(Flight flight) {
         flights.add(flight);
     }
 
-    public HashMap<String, Airplane> getAirplanes() {
+    public ArrayList<Airplane> getAirplanes() {
         return airplanes;
     }
 
