@@ -3,9 +3,8 @@ package mooc.airport;
 public class Main {
 
     public static void main(String[] args) {
-	    Airport airport = new Airport();
-	    Reader reader = new Reader();
-	    TextInterface ui = new TextInterface(reader, airport);
+	    Reader reader = new Reader(); // You could definitely make the reader a singleton too!!
+	    TextInterface ui = new TextInterface(reader);
 	    ui.start();
     }
 }

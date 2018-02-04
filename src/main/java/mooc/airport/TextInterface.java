@@ -2,14 +2,17 @@ package mooc.airport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TextInterface {
     private Reader reader;
     private Airport airport;
+    private AirplaneService airplaneService;
 
-    public TextInterface(Reader reader, Airport airport) {
+    public TextInterface(Reader reader) {
         this.reader = reader;
-        this.airport = airport;
+        this.airport = Airport.getInstance();
+        this.airplaneService = AirplaneService.getInstance();
     }
 
     public void start() {
@@ -35,13 +38,13 @@ public class TextInterface {
                 String id = reader.nextLine();
                 System.out.print("Give plane capacity: ");
                 int capacity = Integer.parseInt(reader.nextLine());
-                airport.addAirplane(new Airplane(id, capacity));
+                airport.getAirplanes().add(new Airplane(id, capacity));
             }
 
             if (command == '2') {
                 // Add flight
                 System.out.print("Give plane ID: ");
-                Airplane plane = airport.getAirplanes().get(reader.nextLine());
+                Airplane plane = airplaneService.getById(reader.nextLine());
                 System.out.print("Give departure airport code: ");
                 String departure = reader.nextLine();
                 System.out.print("Give destination airport code: ");
@@ -70,13 +73,13 @@ public class TextInterface {
                 break;
             }
 
-            HashMap<String, Airplane> airplanes = airport.getAirplanes();
+            List<Airplane> airplanes = airport.getAirplanes();
             ArrayList<Flight> flights = airport.getFlights();
 
             if (command == '1') {
                 // Print planes
-                for (String key: airplanes.keySet()) {
-                    System.out.println(airplanes.get(key));
+                for (Airplane plane: airplanes) {
+                    System.out.println(plane.getId());
                 }
             }
 
@@ -91,12 +94,12 @@ public class TextInterface {
                 // Print plane info
                 System.out.print("Give plane ID: ");
                 String airplaneId = reader.nextLine();
-                Airplane airplane = airplanes.get(airplaneId);
+                Airplane airplane = airplaneService.getById(airplaneId);
 
                 if (airplane == null) {
                     System.out.println("The plane ID entered did not match any current Airplanes\n");
                 } else {
-                    System.out.println(airplanes.get(airplaneId));
+                    System.out.println(airplaneService.getById(airplaneId));
                 }
             }
         }
