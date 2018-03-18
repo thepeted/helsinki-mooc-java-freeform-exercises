@@ -9,8 +9,8 @@ public class TextInterface {
     private Airport airport;
     private AirplaneService airplaneService;
 
-    public TextInterface(Reader reader) {
-        this.reader = reader;
+    public TextInterface() {
+        this.reader = Reader.getInstance();
         this.airport = Airport.getInstance();
         this.airplaneService = AirplaneService.getInstance();
     }
